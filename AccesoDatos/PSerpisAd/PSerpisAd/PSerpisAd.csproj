@@ -44,6 +44,7 @@
     <Compile Include="IEntityListView.cs" />
     <Compile Include="EntityListView.cs" />
     <Compile Include="App.cs" />
+    <Compile Include="DbCommandUtil.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
