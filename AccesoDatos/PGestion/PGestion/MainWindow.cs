@@ -10,17 +10,11 @@ public partial class MainWindow: Gtk.Window
 		Build ();
 		
 		UiManagerHelper uiManagerHelper = new UiManagerHelper(UIManager);
-		
+
 		CategoriaListView categoriaListView = new CategoriaListView();
+		notebook.AppendPage (categoriaListView, new Label("Categorias"));
 		
-		uiManagerHelper.SetActionGroup(categoriaListView.ActionGroup);
-		
-		notebook.AppendPage (categoriaListView, new Label("Categorías"));
-		
-		notebook.SwitchPage += delegate {
-			IEntityListView entityListView = (IEntityListView)notebook.CurrentPageWidget;
-			uiManagerHelper.SetActionGroup(entityListView.ActionGroup);
-		};
+		uiManagerHelper.SetActionGroup (categoriaListView.ActionGroup);
 	}
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)

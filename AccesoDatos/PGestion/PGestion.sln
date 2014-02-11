@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PGestion", "PGestion\PGestion.csproj", "{6D259897-D900-40EB-943F-86AC7CF233C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PGestion", "PGestion\PGestion.csproj", "{7A4203B4-118B-41E0-A6CC-BEFC4A061A7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6D259897-D900-40EB-943F-86AC7CF233C5}.Debug|x86.ActiveCfg = Debug|x86
-		{6D259897-D900-40EB-943F-86AC7CF233C5}.Debug|x86.Build.0 = Debug|x86
-		{6D259897-D900-40EB-943F-86AC7CF233C5}.Release|x86.ActiveCfg = Release|x86
-		{6D259897-D900-40EB-943F-86AC7CF233C5}.Release|x86.Build.0 = Release|x86
+		{7A4203B4-118B-41E0-A6CC-BEFC4A061A7F}.Debug|x86.ActiveCfg = Debug|x86
+		{7A4203B4-118B-41E0-A6CC-BEFC4A061A7F}.Debug|x86.Build.0 = Debug|x86
+		{7A4203B4-118B-41E0-A6CC-BEFC4A061A7F}.Release|x86.ActiveCfg = Release|x86
+		{7A4203B4-118B-41E0-A6CC-BEFC4A061A7F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = PGestion\PGestion.csproj

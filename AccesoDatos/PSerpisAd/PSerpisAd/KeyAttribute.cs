@@ -1,12 +1,10 @@
 using System;
 
-namespace SerpisAd
+namespace Serpis.Ad
 {
-	public class KeyAttribute
+	public class KeyAttribute : Attribute
 	{
-		public KeyAttribute ()
-		{
-		}
+		
 	}
 }
 

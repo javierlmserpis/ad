@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PVenta", "PVenta\PVenta.csproj", "{6D259897-D900-40EB-943F-86AC7CF233C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PGestion", "PGestion\PGestion.csproj", "{6D259897-D900-40EB-943F-86AC7CF233C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +15,6 @@ Global
 		{6D259897-D900-40EB-943F-86AC7CF233C5}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = PVenta\PVenta.csproj
+		StartupItem = PVenta\PGestion.csproj
 	EndGlobalSection
 EndGlobal

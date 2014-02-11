@@ -1,6 +1,6 @@
 using Gtk;
-using MySql.Data.MySqlClient;
 using System;
+using MySql.Data.MySqlClient;
 
 namespace Serpis.Ad
 {
@@ -8,6 +8,8 @@ namespace Serpis.Ad
 	{
 		public static void Main (string[] args)
 		{
+			object obj = Categoria.Load (typeof(Categoria), "");
+			Console.WriteLine ("obj.Gettype()={0}", obj.GetType ());
 			App.Instance.DbConnection = new MySqlConnection("Server=localhost;Database=dbprueba;User Id=root;Password=sistemas");
 			
 			Application.Init ();

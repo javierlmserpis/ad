@@ -1,12 +1,10 @@
 using System;
 
-namespace SerpisAd
+namespace Serpis.Ad
 {
-	public class FieldAttribute
+	public class FieldAttribute : Attribute
 	{
-		public FieldAttribute ()
-		{
-		}
+		
 	}
 }
 
