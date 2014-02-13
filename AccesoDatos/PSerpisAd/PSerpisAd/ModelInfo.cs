@@ -10,7 +10,7 @@ namespace Serpis.Ad
 		{
 			this.type = type;
 			//?¿
-			public static string GetSelect(Type type) {
+/*/			public static string GetSelect(Type type) {
 				string keyName = null;
 				List<string> fieldNames = new List<string>();
 				foreach (PropertyInfo propertyInfo in type.GetProperties ()) {
@@ -19,8 +19,8 @@ namespace Serpis.Ad
 					else if (propertyInfo.IsDefined (typeof(FieldAttribute), true))
 						fieldNames.Add (propertyInfo.Name.ToLower());
 				}
-
-			tableName = type.Name.ToLower();
+			}/*/
+/*/			tableName = type.Name.ToLower();
 		}
 		
 		private string tableName;
@@ -28,6 +28,7 @@ namespace Serpis.Ad
 		public string UpdateText{
 			get { return; }
 		
+	}/*/
+		}
 	}
 }
-

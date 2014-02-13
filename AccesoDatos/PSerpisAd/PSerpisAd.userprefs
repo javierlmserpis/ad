@@ -1,16 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PSerpisAd/ModelInfoStore.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PSerpisAd/ModelHelper.cs">
     <Files>
-      <File FileName="PSerpisAd/ModelInfo.cs" Line="21" Column="3" />
-      <File FileName="PSerpisAd/ModelInfoTest.cs" Line="23" Column="15" />
-      <File FileName="PSerpisAd/ModelInfoStore.cs" Line="20" Column="1" />
+      <File FileName="PSerpisAd/ModelInfo.cs" Line="10" Column="4" />
+      <File FileName="PSerpisAd/ModelInfoTest.cs" Line="1" Column="1" />
+      <File FileName="PSerpisAd/ModelInfoStore.cs" Line="1" Column="1" />
+      <File FileName="PSerpisAd/ModelHelper.cs" Line="79" Column="82" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="PSerpisAd" expanded="True">
-            <Node name="ModelInfoStore.cs" selected="True" />
+            <Node name="ModelHelper.cs" selected="True" />
           </Node>
           <Node name="PSerpisAdTests" expanded="True">
             <Node name="References" expanded="True" />

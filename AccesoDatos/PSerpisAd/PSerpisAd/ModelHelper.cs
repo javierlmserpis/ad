@@ -31,14 +31,20 @@ namespace Serpis.Ad
 			
 			object obj = Activator.CreateInstance(type);
 			foreach (PropertyInfo propertyInfo in type.GetProperties ()) {
-				if (propertyInfo.IsDefined (typeof(KeyAttribute), true))
-					propertyInfo.SetValue(obj, id, null); //TODO convert al tipo destino
-					
-				else if (propertyInfo.IsDefined (typeof(FieldAttribute), true))
-					propertyInfo.SetValue(obj, dataReader[propertyInfo.Name.ToLower()], null); //TODO convert al tipo de destino
+				if (propertyInfo.IsDefined (typeof(KeyAttribute), true)){
+					object value = convert(id, propertyInfo.PropertyType); 
+					propertyInfo.SetValue(obj,value,null);
+			}else if (propertyInfo.IsDefined (typeof(FieldAttribute), true)){
+					object value = convert(dataReader[propertyInfo.Name.ToLower()], propertyInfo.PropertyType,null);
+					propertyInfo.SetValue(obj,value,null);
+				}
 			}
 			dataReader.Close ();
 			return obj;
+		}
+		
+		private object convert(object value, Type type){
+			return Convert.ChangeType (value,type);
 		}
 		
 		private static string formatParameter(string field){
@@ -59,6 +65,8 @@ namespace Serpis.Ad
 			return string.Format ("update{0} set {1} where {2}", tableName, string.Join(", ", fieldParameters), keyParameter);
 		}
 		
+	
+
 		public static void Save(object obj) {
 			IDbCommand updateDbCommand = App.Instance.DbConnection.CreateCommand ();
 			Type type = obj.GetType ();
@@ -67,16 +75,20 @@ namespace Serpis.Ad
 			
 			foreach (PropertyInfo propertyInfo in type.GetProperties ()) {
 				if (propertyInfo.IsDefined (typeof(KeyAttribute), true) || propertyInfo.IsDefined (typeof(KeyAttribute), true)){
-					object value= propertyInfo.GetValue(object, null);
+					
+					object value= propertyInfo.GetValue(object,null);
+					
 					DbCommandUtil.AddParameter (updateDbCommand, propertyInfo.Name.ToLower(), value);
-				}	
-				
+					
+			}
 			
 			updateDbCommand.ExecuteNonQuery ();
 		
+			}
 		}
-			
-		public static String GetInsert(Type type){
+	}
+}
+/*/		public static String GetInsert(Type type){
 		
 				string keyName = null;
 			List<string> fieldNames = new List<string>();
@@ -87,8 +99,7 @@ namespace Serpis.Ad
 					fieldNames.Add (propertyInfo.Name.ToLower());
 			}
 				
-			List<string> fieldNames = new List<string>();
-			foreach (type.)
+			
 				
 			
 			string tableName = type.Name.ToLower();
@@ -99,6 +110,4 @@ namespace Serpis.Ad
 		}
 
 		
-			
-}
-
+	/*/		
