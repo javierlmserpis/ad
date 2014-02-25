@@ -31,66 +31,41 @@ namespace Serpis.Ad
 			
 			object obj = Activator.CreateInstance(type);
 			foreach (PropertyInfo propertyInfo in type.GetProperties ()) {
-				if (propertyInfo.IsDefined (typeof(KeyAttribute), true)){
-					object value = convert(id, propertyInfo.PropertyType); 
-					propertyInfo.SetValue(obj,value,null);
-			}else if (propertyInfo.IsDefined (typeof(FieldAttribute), true)){
-					object value = convert(dataReader[propertyInfo.Name.ToLower()], propertyInfo.PropertyType,null);
-					propertyInfo.SetValue(obj,value,null);
-				}
+				if (propertyInfo.IsDefined (typeof(KeyAttribute), true))
+					propertyInfo.SetValue(obj, id, null); //TODO convert al tipo de destino
+				else if (propertyInfo.IsDefined (typeof(FieldAttribute), true))
+					propertyInfo.SetValue(obj, dataReader[propertyInfo.Name.ToLower()], null); //TODO convert al tipo de destino
 			}
 			dataReader.Close ();
 			return obj;
 		}
-		
-		private object convert(object value, Type type){
-			return Convert.ChangeType (value,type);
-		}
-		
-		private static string formatParameter(string field){
-			return string.Format ("{0}=@{0}", field);
-		}
-		
-		public static string GetUpdate(Type type){
-			string keyParameter = null;
-			List<string> fieldParameters = new List<string>();
-			foreach (PropertyInfo propertyInfo in type.GetProperties ()) {
-				if (propertyInfo.IsDefined (typeof(KeyAttribute), true))
-					keyName = propertyInfo.Name.ToLower ();
-				else if (propertyInfo.IsDefined (typeof(FieldAttribute), true))
-					fieldParameters.Add (formatParameter(propertyInfo.Name.ToLower()));
+		public static string GetDelete(Type type){
+			string KeyParameter = null;
+			string KeyField = null;
+			
+			foreach (PropertyInfo propertyInfo in type.GetProperties()){
+				if (propertyInfo.IsDefined (typeof(KeyAttribute), true)) {
+					KeyParameter = "@"+propertyInfo.Name.ToLower ();
+					KeyField=propertyInfo.Name.ToLower();
+				}
 			}
 			string tableName = type.Name.ToLower();
-			
-			return string.Format ("update{0} set {1} where {2}", tableName, string.Join(", ", fieldParameters), keyParameter);
+			return string.Format("DELETE FROM {0} where {1}={2}",tableName,KeyField,KeyParameter);
+		}
+		public static void Delete(object obj){
+			Type type = obj.GetType();
+			IDbCommand deleteDbCommand = App.Instance.DbConnection.CreateCommand();
+			deleteDbCommand.CommandText = GetDelete (obj.GetType());
+			foreach(PropertyInfo propertyInfo in type.GetProperties()){
+				object valueType = propertyInfo.GetValue(obj,null);
+				DbCommandUtil.AddParameter(deleteDbCommand, propertyInfo.Name.ToLower(), valueType);
+				
+			}
+			deleteDbCommand.ExecuteNonQuery();
 		}
 		
-	
-
-		public static void Save(object obj) {
-			IDbCommand updateDbCommand = App.Instance.DbConnection.CreateCommand ();
-			Type type = obj.GetType ();
-			updateDbCommand.CommandText = GetUpdate (obj.GetType());
-			DbCommandUtil.AddParameter (updateDbCommand, "", categoria.Nombre);
-			
-			foreach (PropertyInfo propertyInfo in type.GetProperties ()) {
-				if (propertyInfo.IsDefined (typeof(KeyAttribute), true) || propertyInfo.IsDefined (typeof(KeyAttribute), true)){
-					
-					object value= propertyInfo.GetValue(object,null);
-					
-					DbCommandUtil.AddParameter (updateDbCommand, propertyInfo.Name.ToLower(), value);
-					
-			}
-			
-			updateDbCommand.ExecuteNonQuery ();
-		
-			}
-		}
-	}
-}
-/*/		public static String GetInsert(Type type){
-		
-				string keyName = null;
+		public static String GetInsert(Type type){
+			string keyName;
 			List<string> fieldNames = new List<string>();
 			foreach (PropertyInfo propertyInfo in type.GetProperties ()) {
 				if (propertyInfo.IsDefined (typeof(KeyAttribute), true))
@@ -98,16 +73,21 @@ namespace Serpis.Ad
 				else if (propertyInfo.IsDefined (typeof(FieldAttribute), true))
 					fieldNames.Add (propertyInfo.Name.ToLower());
 			}
-				
-			
-				
-			
 			string tableName = type.Name.ToLower();
 			
 			return string.Format ("insert into {0} ({1}) VALUES ({2})",
 			                       tableName, string.Join(", ", fieldNames));
-				
 		}
+		public static void Insert(object obj){
+			Type type = obj.GetType();
+			IDbCommand insertDbCommand = App.Instance.DbConnection.CreateCommand();
+			insertDbCommand.CommandText = GetInsert (obj.GetType());
+			foreach(PropertyInfo propertyInfo in type.GetProperties()){
+				object valueType = propertyInfo.GetValue(obj,null);
+				DbCommandUtil.AddParameter(insertDbCommand, propertyInfo.Name.ToLower(), valueType);
+			}
+			insertDbCommand.ExecuteNonQuery();
+		}
+	}
+}
 
-		
-	/*/		

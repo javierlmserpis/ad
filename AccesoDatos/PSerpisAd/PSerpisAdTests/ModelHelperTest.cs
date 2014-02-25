@@ -41,17 +41,6 @@ namespace Serpis.Ad
 			expected = "select nombre, precio from modelhelperbar where id=";
 			Assert.AreEqual (expected, selectText);
 		}
-
-		[Test]
-		public void UpdateText(){
-
-			string updateText;
-			string expected;
-
-			ModelInfo modelInfo = new ModelInfo (typeof(ModelInfoFoo));
-
-			Assert.AreEqual ("UPDATE modelinfofoo set nombre=@nombre where id=@id", modelInfo.UpdateText);
-		}
 	}
 }
 
