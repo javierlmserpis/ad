@@ -78,14 +78,15 @@ namespace Serpis.Ad
 			return string.Format ("insert into {0} ({1}) VALUES ({2})",
 			                       tableName, string.Join(", ", fieldNames));
 		}
+		//con model info
 		public static void Insert(object obj){
-			
-			Type type = obj.GetType();
+			ModelInfo modelInfo = new ModelInfo(obj.GetType());
+
 			IDbCommand insertDbCommand = App.Instance.DbConnection.CreateCommand();
-			insertDbCommand.CommandText = GetInsert (obj.GetType());
-			foreach(PropertyInfo propertyInfo in type.GetProperties()){
-				object valueType = propertyInfo.GetValue(obj,null);
-				DbCommandUtil.AddParameter(insertDbCommand, propertyInfo.Name.ToLower(), valueType);
+			insertDbCommand.CommandText = modelInfo.InsertText;
+			foreach(PropertyInfo propertyInfo in modelInfo.FieldPropertyInfos){
+				object value = propertyInfo.GetValue(obj,null);
+				DbCommandUtil.AddParameter(insertDbCommand, propertyInfo.Name.ToLower(), value);
 			}
 			insertDbCommand.ExecuteNonQuery();
 		}
