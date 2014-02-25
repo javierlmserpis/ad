@@ -12,9 +12,9 @@ namespace Serpis.Ad
 		{
 			this.type = type;
 			tableName = type.Name.ToLower ();
-			
 				
 		}
+		public string InsertText {get {return null;}}
 		private string tableName;
 		private string keyParameter;
 		private string fieldNames;

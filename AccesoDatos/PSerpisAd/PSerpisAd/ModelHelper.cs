@@ -79,6 +79,7 @@ namespace Serpis.Ad
 			                       tableName, string.Join(", ", fieldNames));
 		}
 		public static void Insert(object obj){
+			
 			Type type = obj.GetType();
 			IDbCommand insertDbCommand = App.Instance.DbConnection.CreateCommand();
 			insertDbCommand.CommandText = GetInsert (obj.GetType());
